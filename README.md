@@ -42,7 +42,7 @@ docker-compose down -v && docker-compose up -d
 docker exec -i bigdatasnowflake-postgres-1 psql -U admin -d mydb < q.sql
 ```
 
-3. Выполним скрипты ddl.sql и dml.sql для создания и заполнения таблиц фактов и измерений из исходных данных в соответствие с моделью звезда
+3. Выполним скрипты ddl.sql и dml.sql для создания и заполнения таблиц фактов и измерений из исходных данных в соответствие с моделью снежинка/звезда
 ```bash
 docker exec -i bigdatasnowflake-postgres-1 psql -U admin -d mydb < ~/progs/BigDataSnowflake/ddl.sql #создаем
 docker exec -i bigdatasnowflake-postgres-1 psql -U admin -d mydb < ~/progs/BigDataSnowflake/dml.sql #заполняем
