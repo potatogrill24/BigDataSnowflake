@@ -28,3 +28,24 @@
 2. Файл docker-compose.yml с установкой PostgreSQL и заполненными данными из файлов mock_data(*).csv.
 3. Скрипты DDL (SQL) создания таблиц фактов и измерений в соответствии с моделью снежинка/звезда.
 4. Скрипты DML (SQL) заполнения таблиц фактов и измерений из исходных данных.
+
+
+### Для создания контейнера с БД PostgreSQL воспользуемся следующими командами
+
+1. Создаем контейнер docker, в котором инициализируется БД PostgreSQL, создается таблица mock_data и заполняется из директории ./data
+```bash
+docker-compose down -v && docker-compose up -d
+```
+
+2. Выполним некие запросы в таблицу mock_data, чтобы убедиться в наличии в ней данных и немного их проанализировать
+```bash
+docker exec -i bigdatasnowflake-postgres-1 psql -U admin -d mydb < q.sql
+```
+
+3. Выполним скрипты ddl.sql и dml.sql для создания и заполнения таблиц фактов и измерерий из исходных данных в соответсвие с моделью звезда
+```bash
+docker exec -i bigdatasnowflake-postgres-1 psql -U admin -d mydb < ~/progs/BigDataSnowflake/ddl.sql #создаем
+docker exec -i bigdatasnowflake-postgres-1 psql -U admin -d mydb < ~/progs/BigDataSnowflake/dml.sql #заполняем
+```
+
+Схема базы данных из DBeaver приложена в файле result_diagram.png
